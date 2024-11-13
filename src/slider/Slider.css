@@ -1,0 +1,446 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+body {
+    margin: 0;
+    background-color: #000;
+    color: #eee;
+    font-family: Poppins, sans-serif;
+    font-size: 12px;
+}
+
+a {
+    text-decoration: none;
+}
+
+header {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 100;
+    width: calc(100% - 10px);
+    background-color: rgba(0, 0, 0, 0.8); /* Background color for the header */
+    padding: 10px; /* Add some padding for aesthetics */
+}
+
+.logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    height: 50px;
+    width: auto;
+}
+
+.logo-text {
+    margin-top: 5px; /* Space between logo and text */
+    font-size: 14px; /* Adjust font size as needed */
+    color: #eee; /* Text color */
+    text-align: center; /* Center the text */
+}
+
+nav {
+    display: flex;
+    gap: 10px;
+    margin-left: auto;
+}
+
+header a {
+    color: #eee;
+    margin-right: 5px;
+    padding: 5px 10px;
+    transition: 0.2s;
+    font-size: 1rem;
+}
+
+.menu-button {
+    background-color: #14ff72cb;
+    border: none;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: auto;
+    display: none; /* Hidden by default, will show in mobile */
+}
+
+a.active {
+    background: #14ff72cb;
+    border-radius: 2px;
+}
+
+header a:hover {
+    background: #14ff72cb;
+    border-radius: 2px;
+}
+
+.slider {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    position: relative;
+    background-color: #000;
+}
+
+.slider .list .item {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+}
+
+.slider .list .item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slider .list .item .content {
+    position: absolute;
+    top: 30%;
+    width: 1140px;
+    max-width: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-right: 30%;
+    box-sizing: border-box;
+    color: #fff;
+    text-shadow: 0 5px 10px #0004;
+}
+
+.slider .list .item .content .title,
+.slider .list .item .content .type {
+    font-size: 5em;
+    font-weight: bold;
+    line-height: 1.3em;
+}
+
+.slider .list .item .type {
+    color: #14ff72cb;
+}
+
+.slider .list .item .button {
+    display: grid;
+    grid-template-columns: repeat(2, 130px);
+    grid-template-rows: 40px;
+    gap: 5px;
+    margin-top: 20px;
+}
+
+
+.slider .list .item .button button {
+    border: none;
+    background-color: #000000;
+    font-family: Poppins, sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.4s;
+    letter-spacing: 2px;
+}
+
+.slider .list .item .button button:hover {
+    letter-spacing: 3px;
+}
+
+.slider .list .item .button button:nth-child(2) {
+    background-color: transparent;
+    border: 1px solid #fff;
+}
+
+.thumbnail {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    width: max-content;
+    z-index: 100;
+    display: flex;
+    gap: 20px;
+    transform: translateX(-50%);
+}
+
+.thumbnail .item {
+    width: 150px;
+    height: 220px;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.thumbnail .item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.nextPrevArrows {
+    position: absolute;
+    top: 80%;
+    right: 50%;
+    transform: translateX(50%);
+    z-index: 100;
+    width: 300px;
+    max-width: 30%;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}.thumbnail .item.active {
+    border: 2px solid #14ff72cb;
+    opacity: 1;
+    transform: scale(1.2);
+    border-radius: 20px;
+}
+
+.next {
+    right: 10px;
+}
+.nextPrevArrows button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #14ff72cb;
+    border: none;
+    color: #fff;
+    font-family: monospace;
+    font-weight: bold;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.nextPrevArrows button:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+.slider .list .item:nth-child(1) {
+    z-index: 1;
+}
+
+.slider .list .item:nth-child(1) .content .title,
+.slider .list .item:nth-child(1) .content .type,
+.slider .list .item:nth-child(1) .content .description,
+.slider .list .item:nth-child(1) .content .buttons {
+    transform: translateY(50px);
+    filter: blur(20px);
+    opacity: 0;
+    animation: showContent 0.5s 1s linear forwards;
+}
+
+@keyframes showContent {
+    to {
+        transform: translateY(0);
+        filter: blur(0);
+        opacity: 1;
+    }
+}
+
+.slider.next .list .item:nth-child(1) img {
+    width: 150px;
+    height: 220px;
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    border-radius: 30px;
+    animation: showImage 0.5s linear forwards;
+}
+
+@keyframes showImage {
+    to {
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+}
+
+.slider.next .thumbnail .item:nth-last-child(1) {
+    overflow: hidden;
+    animation: showThumbnail 0.5s linear forwards;
+}
+
+@keyframes showThumbnail {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+}
+
+.slider.next .thumbnail {
+    animation: effectNext 0.5s linear forwards;
+}
+
+@keyframes effectNext {
+    from {
+        transform: translateX(150px);
+    }
+}
+
+.slider.prev .list .item:nth-child(2) img {
+    animation: outFrame 0.5s linear forwards;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+@keyframes outFrame {
+    to {
+        width: 150px;
+        height: 220px;
+        bottom: 50px;
+        left: 50%;
+        border-radius: 20px;
+    }
+}
+
+.slider.prev .thumbnail .item:nth-child(1) {
+    overflow: hidden;
+    opacity: 0;
+    animation: showThumbnail 0.5s linear forwards;
+}
+
+@media screen and (max-width: 678px) {
+    .title {
+        font-size: 1.5rem; /* Reduced font size for title */
+        font-weight: bold;
+        color: #ffffff;
+    }
+    
+    .type {
+        font-size: 1.5rem; /* Reduced font size for type */
+        font-weight: 500;
+        color: #ffffff;
+        margin-bottom: 8px;
+        
+    }
+    
+    .description {
+        font-size: 1rem; /* Reduced font size for description */
+        color: #cccccc;
+        margin-bottom: 10px;
+        padding-left: 3px;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)); /* Light black fading effect */
+        border-radius: 10px;
+    }
+    
+  
+    .thumbnail {
+        position: absolute;
+        bottom: 50px;
+        left: 50%;
+        width: 100%; /* Set to full width */
+        z-index: 100;
+        display: flex;
+        justify-content: space-around; /* Distribute space evenly */
+        transform: translateX(-50%);
+    }.thumbnail .item.active {
+        border: 2px solid #14ff72cb;
+        padding-top: 0px;
+        opacity: 1;
+        transform: scale(1.2);
+        border-radius: 20px;
+    }
+
+    .thumbnail .item {
+        padding-top: 20px;
+        margin-left: 15px;
+        width: 40%; /* Set width to ensure three fit in a row */
+        height: 190px; /* Increase height for larger thumbnails */
+        flex-shrink: 0; /* Prevent shrinking */
+    }
+
+    .thumbnail .item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 20px; /* Keep existing border radius */
+        box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3); /* Keep existing shadow */
+    }
+    
+    /* Adjust the logo and other styles as needed... */
+    .logo-container {
+       margin-left: -50px;
+    }
+    header {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center align items */
+        position: fixed; /* Position relative for absolute elements */
+     
+        width: 100%; /* Ensure header takes full width */
+    }
+
+    .logo-container {
+       margin-right: 300px;
+    }
+
+    .logo {
+        height: 45px;
+        width: auto;
+    }
+
+
+    /* Show menu button at the top right */
+    .menu-button {
+        width: 40px;
+        display: block; /* Show button in mobile */
+        position: absolute; /* Position absolute to place in top right corner */
+        top: 15px; /* Adjust top position */
+       right: 10px;
+        z-index: 100; /* Ensure it is above other elements */
+    }
+
+    header nav {
+        display: none; /* Hide nav by default */
+    }
+
+    .slider .list .item .content {
+        padding-right: 0; /* Adjust content padding */
+    }
+
+    .slider .list .item .content .title {
+        font-size: 50px; /* Adjust font size for mobile */
+    }
+
+    nav.open {
+        display: flex;
+        flex-direction: column; /* Stack items vertically */
+        position: absolute;
+        top: 60px; /* Position nav below the menu button */
+        left: 0;
+        right: 0; /* Ensure it takes full width */
+        background-color: #111; /* Background color for menu */
+        transition: max-height 0.5s ease-in-out;
+        padding: 10px 0; /* Padding for menu */
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 2px 10px rgba(240, 82, 82, 0.5); /* Shadow for depth */
+    }
+
+    nav.closed {
+        display: none; /* Hide when closed */
+    }
+
+    nav a {
+        color: #eee; /* Link color */
+        margin: 5px 0; /* Space between links */
+        padding: 10px; /* Padding for clickable area */
+        transition: background 0.2s; /* Transition for hover effect */
+        text-align: center; /* Center align links */
+    }
+
+    nav a:hover {
+        background: #14ff72cb; /* Highlight on hover */
+        border-radius: 4px; /* Rounded corners on hover */
+    }
+}
+.fade-in {
+    opacity: 1;
+    transition: opacity 2s ease-in;
+}
+
+.fade-out {
+    opacity: 0;
+    transition: opacity 2s ease-out;
+}

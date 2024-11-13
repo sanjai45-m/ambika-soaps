@@ -1,0 +1,132 @@
+/* Base styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f0f0f0; /* Light background color */
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    background-image: url('/src/assets/soap/charcoal-soap.jpg'); /* Replace with your image URL */
+}
+
+/* Contact Us section */
+.contact-us {
+    max-width: 800px;
+    width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative; /* Needed for positioning the background image */
+    z-index: 1; /* Ensure form content is above the blurred background */
+}
+
+/* Background image with blur effect */
+.contact-us::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+   
+    background-size: cover;
+    background-position: center;
+    filter: blur(10px); /* Apply blur effect */
+    z-index: -1; /* Position behind the form */
+}
+
+/* Heading styling */
+.contact-us h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: black;
+}
+
+/* Form row styling */
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+/* Form group styling */
+.form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: black;
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+/* Button styling */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Status message styling */
+.status-message {
+    margin-top: 10px;
+    text-align: center;
+    color: green;
+}
+.error-message {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 4px;
+}
+.status-message {
+    color: green;
+    margin-top: 10px;
+}
+
+/* Responsive styling for smaller screens */
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column; /* Stack rows on top of each other */
+    }
+    .form-group {
+        width: 100%; /* Full width for each form group */
+    }
+    button {
+        font-size: 14px; /* Adjust button font size for mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-us {
+        padding: 15px;
+    }
+    button {
+        padding: 8px;
+        font-size: 14px;
+    }
+    .contact-us h2 {
+        font-size: 20px; /* Adjust title font size for smaller screens */
+    }
+}
