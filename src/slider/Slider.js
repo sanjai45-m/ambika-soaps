@@ -2,23 +2,27 @@ import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import "./Slider.css";
-import img1 from "../assets/first.jpeg";
-import img2 from "../assets/second.jpg";
-import img3 from "../assets/third.jpeg";
-import img4 from "../assets/fourth.jpeg";
 import logo from "../assets/logo.png";
 
 const Slider = () => {
-    const [items, setItems] = useState([
-        { src: img1, title: "Beauty Skin ", type: "Solutions", description: "Radiant, Glowing, Refreshing, Hydrating, Perfect." },
-        { src: img2, title: "Herbal Hair ", type: "Care", description: "Strengthening, Revitalizing, Natural, Refreshing, Essential." },
-        { src: img3, title: "Healing Serums", type: "& Oils", description: "Moisturizing, Smooth, Nourishing, Revitalizing, Essential." },
-        { src: img4, title: "Natural Soothing ", type: "Soaps", description: "Gentle, Organic, Nourishing, Refreshing, Healthy." }
-    ]);
-
+    const [items, setItems] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [fade, setFade] = useState("fade-in");
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    // Fetch banners from API
+    useEffect(() => {
+        const fetchBanners = async () => {
+            try {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/api/products/banners`);
+                const data = await response.json();
+                setItems(data);
+            } catch (error) {
+                console.error("Error fetching banners:", error);
+            }
+        };
+        fetchBanners();
+    }, []);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -73,17 +77,22 @@ const Slider = () => {
                     <a href="#">Contact</a>
                 </nav>
             </header>
+
             <div className={`list ${fade}`}>
                 <div className="item">
-                    <img src={items[currentIndex].src} alt={`Slide ${currentIndex + 1}`} />
-                    <div className="content">
-                        <div className="title">{items[currentIndex].title}</div>
-                        <div className="type">{items[currentIndex].type}</div>
-                        <div className="description">{items[currentIndex].description}</div>
-                        <div className="button">
-                            <button onClick={() => scrollToSection("products-section")}>SEE MORE</button>
-                        </div>
-                    </div>
+                    {items.length > 0 && (
+                        <>
+                            <img src={items[currentIndex].imageUrl} alt={`Slide ${currentIndex + 1}`} />
+                            <div className="content">
+                                <div className="title">{items[currentIndex].title}</div>
+                                <div className="type">{items[currentIndex].type}</div>
+                                <div className="description">{items[currentIndex].description}</div>
+                                <div className="button">
+                                    <button onClick={() => scrollToSection("products-section")}>SEE MORE</button>
+                                </div>
+                            </div>
+                        </>
+                    )}
                 </div>
             </div>
 
@@ -94,7 +103,7 @@ const Slider = () => {
                         key={index}
                         className={`item ${index === currentIndex ? "active" : ""}`}
                     >
-                        <img src={item.src} alt={`Thumbnail ${index + 1}`} />
+                        <img src={item.imageUrl} alt={`Thumbnail ${index + 1}`} />
                     </div>
                 ))}
             </div>

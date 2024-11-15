@@ -33,7 +33,7 @@ function App() {
             }
           />
           <Route path="/all-products" element={<AllProducts />} />
-          <Route path="/products/:productName" element={<ProductDetails />} />
+          <Route path="/products/:productId" element={<ProductDetails />} />
         </Routes>
       </div>
     </Router>

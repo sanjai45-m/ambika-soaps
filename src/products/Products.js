@@ -1,28 +1,34 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Products.css";
-import products from "../ProductData"; // Ensure sub-products are part of the data
 
 const Products = () => {
+    const [products, setProducts] = useState([]);
     const navigate = useNavigate();
     const displayLimit = 5;
 
-    const handleProductClick = (productName) => {
-        // Assuming each product has a 'subProducts' array that contains its sub-products
-        const product = products.find((prod) => prod.name === productName);
+    // Fetch products from the API
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                console.log(`here is `);
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/api/products`);
+                const data = await response.json();
+                setProducts(data);
+            } catch (error) {
+                console.error("Error fetching products:", error);
+            }
+        };
+        fetchProducts();
+    }, []);
 
-        if (product && product.subProducts && product.subProducts.length > 0) {
-            // Navigate to the product page with sub-products (replace with your route structure)
-            navigate(`/products/${productName}`, { state: { subProducts: product.subProducts } });
-        } else {
-            // Handle case where no sub-products are available
-            navigate(`/products/${productName}`);
-        }
+    const handleProductClick = (productId) => {
+        // Navigate to the product details page using productId
+        navigate(`/products/${productId}`);
     };
 
     return (
         <>
-            {/* Full screen intro container */}
             <div className="intro-container">
                 <div className="products-container">
                     <h1 className="products-title">Our Products</h1>
@@ -32,7 +38,7 @@ const Products = () => {
                             <div
                                 key={product.id}
                                 className="product-item"
-                                onClick={() => handleProductClick(product.name)}
+                                onClick={() => handleProductClick(product.id)}
                             >
                                 <img src={product.image} alt={product.name} className="product-image" />
                                 <h2>{product.name}</h2>

@@ -1,5 +1,3 @@
-// ContactUs.js (React Component)
-
 import React, { useState } from 'react';
 import './ContactUs.css';
 
@@ -10,15 +8,16 @@ const ContactUs = () => {
         product: '',
         message: '',
         address: '',
-        SenderEmail: '' // Add the SenderEmail field
+        senderEmail: '' // corrected to match backend expectation
     });
+
 
     const [errors, setErrors] = useState({});
     const [status, setStatus] = useState('');
 
     const validateForm = () => {
         const errors = {};
-
+    
         if (formData.name.trim().length < 2) {
             errors.name = 'Name must be at least 2 characters long.';
         }
@@ -34,13 +33,14 @@ const ContactUs = () => {
         if (formData.address.trim() === '') {
             errors.address = 'Address field cannot be empty.';
         }
-        if (!/\S+@\S+\.\S+/.test(formData.SenderEmail)) { // Validate email format
-            errors.SenderEmail = 'Please enter a valid email address.';
+        if (!/\S+@\S+\.\S+/.test(formData.senderEmail)) { // use senderEmail here
+            errors.senderEmail = 'Please enter a valid email address.';
         }
-
+    
         setErrors(errors);
         return Object.keys(errors).length === 0;
     };
+    
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -54,20 +54,30 @@ const ContactUs = () => {
             return;
         }
     
-        console.log('Submitting form...');  // Add this line to debug
+        const urlEncodedData = new URLSearchParams();
+        for (const key in formData) {
+            urlEncodedData.append(key, formData[key]);
+        }
     
         try {
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/send-email`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/products/send`, {
                 method: 'POST',
-                credentials: 'include',  // Optional, for sending cookies
-                mode: 'cors',  // This ensures CORS is enabled
                 headers: {
-                    'Content-Type': 'application/json',  // Ensure this is set
+                    'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: JSON.stringify(formData),  // Pass the form data
+                body: urlEncodedData.toString(),
             });
     
             if (response.ok) {
+                // Sending data to Firebase
+                await fetch('https://authen-48d46-default-rtdb.firebaseio.com/contacts.json', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                });
+    
                 setStatus('Thank you for contacting us!');
                 setFormData({
                     name: '',
@@ -75,25 +85,28 @@ const ContactUs = () => {
                     product: '',
                     message: '',
                     address: '',
-                    SenderEmail: '' // Reset the SenderEmail field
+                    senderEmail: ''
                 });
                 setErrors({});
             } else {
+                const errorData = await response.json();
+                console.log("Error data:", errorData);
                 setStatus('Failed to send message. Please try again.');
             }
         } catch (error) {
+            console.log("Request error:", error);
             setStatus('An error occurred. Please try again later.');
         }
     };
     
-    
+
     return (
         <div className="contact-us">
             <h2>Contact Us</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-row">
                     <div className="form-group">
-                        <label>Name</label>
+                        <label>Name</label> 
                         <input
                             type="text"
                             name="name"
@@ -155,10 +168,9 @@ const ContactUs = () => {
                         <label>Sender Email</label>
                         <input
                             type="email"
-                            name="SenderEmail"
-                            value={formData.SenderEmail}
+                            name="senderEmail" // match this with the backend
+                            value={formData.senderEmail}
                             onChange={handleChange}
-                            required
                         />
                         {errors.SenderEmail && <p className="error-message">{errors.SenderEmail}</p>}
                     </div>
