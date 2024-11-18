@@ -1,0 +1,123 @@
+/* Apply white background color to the entire page */
+/* Apply black background color to the body of this page */
+body {
+    background-color: black !important; /* Use !important to ensure it's applied */
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Container Styling */
+.user-review-container {
+    height: 100vh;
+    padding: 20px;
+    background: white; /* White background for review section */
+    text-align: center;
+   
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+/* Title Styling */
+.user-review-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    position: relative;
+}
+
+/* Green underline effect */
+.user-review-title::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;  /* Adjust the position of the underline */
+    left: 45%;
+    width: 10%;
+    height: 3px;  /* Thickness of the underline */
+    background-color: green;  /* Green color for the underline */
+}
+
+/* Rest of your CSS remains the same */
+
+
+/* Title Styling */
+.user-review-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+/* Carousel Styling (for mobile view) */
+.review-carousel {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+/* Review Card Styling */
+.review-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    width: 100%; /* Full width on small screens */
+    max-width: 320px; /* Limit the width on larger screens */
+    transition: transform 0.3s ease;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Review Card Hover Effect */
+.review-card:hover {
+    transform: translateY(-10px);
+}
+
+/* Snapshot Image Styling (Dynamic height based on image) */
+.review-snapshot {
+    width: 100%;
+    height: auto;  /* Maintain aspect ratio while adjusting dynamically */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    object-fit: cover;  /* Ensure the image covers the area without distortion */
+}
+
+/* Hover effect on image */
+.review-snapshot:hover {
+    transform: scale(1.05);
+}
+
+/* Mobile-specific Styles */
+@media (max-width: 767px) {
+    .user-review-title {
+        font-size: 1.5rem; /* Slightly smaller title on mobile */
+    }
+
+    .review-carousel {
+        flex-direction: column; /* Stack images vertically on mobile */
+        align-items: center;
+    }
+
+    .review-card {
+        width: 90%; /* Make the cards take up most of the screen on mobile */
+        margin-bottom: 15px;
+    }
+}
+
+/* Tablet and larger screens */
+@media (min-width: 768px) {
+    .review-carousel {
+        flex-direction: row; /* Arrange images in a row on larger screens */
+    }
+
+    .review-card {
+        width: 30%; /* 3 items in a row on medium and large screens */
+    }
+}

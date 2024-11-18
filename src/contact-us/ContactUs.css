@@ -6,7 +6,7 @@ body, html {
     height: 100%;
     background-color: #f0f0f0; /* Light background color */
     overflow-x: hidden; /* Prevent horizontal scroll */
-    background-image: url('/src/assets/soap/charcoal-soap.jpg'); /* Replace with your image URL */
+    background-image: url('/src/assets/charcoal-soap.jpg'); /* Replace with your image URL */
 }
 
 /* Contact Us section */
@@ -18,11 +18,11 @@ body, html {
     background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    position: relative; /* Needed for positioning the background image */
-    z-index: 1; /* Ensure form content is above the blurred background */
+    position: relative; 
+    z-index: 1; 
 }
 
-/* Background image with blur effect */
+
 .contact-us::before {
     content: "";
     position: absolute;

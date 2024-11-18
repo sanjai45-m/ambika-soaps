@@ -8,17 +8,26 @@ const Products = () => {
     const displayLimit = 5;
 
     // Fetch products from the API
+    async function fetchProducts() {
+        try {
+            const response = await fetch('https://authen-48d46-default-rtdb.firebaseio.com/products.json');
+            const data = await response.json();
+
+            // Transform the response into an array of product objects
+            const productArray = data ? Object.keys(data).map(key => ({
+                id: key, // Use the key as the product ID
+                ...data[key] // Spread the product data
+            })) : [];
+
+            console.log('Fetched Products:', productArray);
+            setProducts(productArray); // Set the transformed array to state
+        } catch (error) {
+            console.error('Error fetching products:', error);
+        }
+    }
+
+    // Fetch products when the component mounts
     useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                console.log(`here is `);
-                const response = await fetch(`${process.env.REACT_APP_API_URL}/api/products`);
-                const data = await response.json();
-                setProducts(data);
-            } catch (error) {
-                console.error("Error fetching products:", error);
-            }
-        };
         fetchProducts();
     }, []);
 
@@ -34,23 +43,35 @@ const Products = () => {
                     <h1 className="products-title">Our Products</h1>
                     <div className="underline"></div>
                     <div className="products-list">
-                        {products.slice(0, displayLimit).map((product) => (
-                            <div
-                                key={product.id}
-                                className="product-item"
-                                onClick={() => handleProductClick(product.id)}
-                            >
-                                <img src={product.image} alt={product.name} className="product-image" />
-                                <h2>{product.name}</h2>
-                                <p>{product.description}</p>
-                            </div>
-                        ))}
+                        {/* Check if products is an array and if it has data */}
+                        {Array.isArray(products) && products.length > 0 ? (
+                            products.slice(0, displayLimit).map((product) => (
+                                <div
+                                    key={product.id}
+                                    className="product-item"
+                                    onClick={() => handleProductClick(product.id)}
+                                >
+                                    {/* Display product image with fallback */}
+                                    <img
+                                        src={product.image || 'default-image-url'} // Add a fallback if image is missing
+                                        alt={product.name}
+                                        className="product-image"
+                                    />
+                                    <h2>{product.name}</h2>
+                                    <p>{product.description}</p>
+                                </div>
+                            ))
+                        ) : (
+                            <p>No products available</p> // Display message if no products
+                        )}
                     </div>
-                    {products.length > displayLimit && (
-                        <button className="view-all-button" onClick={() => navigate("/all-products")}>
-                            View All Products ➔
-                        </button>
-                    )}
+                    <button
+                        className="view-all-button"
+                        onClick={() => navigate("/all-products", { state: { products } })}
+                    >
+                        View All Products ➔
+                    </button>
+
                 </div>
             </div>
         </>

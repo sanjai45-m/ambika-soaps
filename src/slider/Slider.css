@@ -18,7 +18,7 @@ header {
     align-items: center;
     gap: 15px;
     z-index: 100;
-    width: calc(100% - 10px);
+    width: calc(100% - 0px);
     background-color: rgba(0, 0, 0, 0.8); /* Background color for the header */
     padding: 10px; /* Add some padding for aesthetics */
 }
@@ -360,9 +360,7 @@ header a:hover {
     }
     
     /* Adjust the logo and other styles as needed... */
-    .logo-container {
-       margin-left: -50px;
-    }
+    
     header {
         display: flex;
         flex-direction: column;

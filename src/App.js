@@ -8,7 +8,9 @@ import Footer from './footer/Footer';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import ProductDetails from './productDetails/ProductDetails';
 import ContactUs from './contact-us/ContactUs';
-
+import UserReview from './user-review/UserReview';
+import LoginPage from './components/Login/LoginPage';
+import RegisterPage from './components/Register/RegisterPage';
 function App() {
   return (
     <Router>
@@ -28,12 +30,16 @@ function App() {
                 <div id="contact-us-section">
                   <ContactUs />
                 </div>
+                
                 <Footer />
               </>
             }
           />
           <Route path="/all-products" element={<AllProducts />} />
           <Route path="/products/:productId" element={<ProductDetails />} />
+          <Route path="/user-review" element={<UserReview />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
         </Routes>
       </div>
     </Router>

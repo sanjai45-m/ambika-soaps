@@ -3,26 +3,41 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import "./Slider.css";
 import logo from "../assets/logo.png";
-
+import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const Slider = () => {
     const [items, setItems] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [fade, setFade] = useState("fade-in");
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const navigate = useNavigate();
 
     // Fetch banners from API
     useEffect(() => {
         const fetchBanners = async () => {
             try {
-                const response = await fetch(`${process.env.REACT_APP_API_URL}/api/products/banners`);
+                const response = await fetch(`https://authen-48d46-default-rtdb.firebaseio.com/banner.json`); // Updated path to access 'banner'
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
                 const data = await response.json();
-                setItems(data);
+                
+                // Check if data exists and is an object
+                if (data && typeof data === "object") {
+                    setItems(Object.values(data)); // Only call Object.values if data is valid
+                } else {
+                    console.error("Invalid data format:", data);
+                    setItems([]); // Fallback to empty array
+                }
             } catch (error) {
                 console.error("Error fetching banners:", error);
+                setItems([]); // Fallback to empty array on error
             }
         };
         fetchBanners();
     }, []);
+    
+    
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -73,8 +88,9 @@ const Slider = () => {
                     <a href="#" className="active">Home</a>
                     <a href="#" onClick={() => scrollToSection("about-section")}>About</a>
                     <a href="#" onClick={() => scrollToSection("products-section")}>Products</a>
-                    <a href="#">Services</a>
-                    <a href="#">Contact</a>
+                    <a href="#" onClick={() => navigate("/user-review")}>User Reviews</a>
+                    <a href="#" onClick={() => scrollToSection("contact-us-section")}>Contact</a>
+                    <a href="#" onClick={() => navigate("/login")}>Login</a>
                 </nav>
             </header>
 

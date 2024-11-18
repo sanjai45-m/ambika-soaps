@@ -60,15 +60,9 @@ const ContactUs = () => {
         }
     
         try {
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/products/send`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: urlEncodedData.toString(),
-            });
+          
     
-            if (response.ok) {
+            
                 // Sending data to Firebase
                 await fetch('https://authen-48d46-default-rtdb.firebaseio.com/contacts.json', {
                     method: 'POST',
@@ -88,11 +82,6 @@ const ContactUs = () => {
                     senderEmail: ''
                 });
                 setErrors({});
-            } else {
-                const errorData = await response.json();
-                console.log("Error data:", errorData);
-                setStatus('Failed to send message. Please try again.');
-            }
         } catch (error) {
             console.log("Request error:", error);
             setStatus('An error occurred. Please try again later.');
@@ -142,15 +131,16 @@ const ContactUs = () => {
                     </div>
                 </div>
                 <div className="form-row">
-                    <div className="form-group">
-                        <label>Message</label>
+                <div className="form-group">
+                        <label> Email</label>
                         <textarea
-                            name="message"
-                            value={formData.message}
+                            type="email"
+                            name="senderEmail" // match this with the backend
+                            value={formData.senderEmail}
                             onChange={handleChange}
                             required
                         ></textarea>
-                        {errors.message && <p className="error-message">{errors.message}</p>}
+                        {errors.SenderEmail && <p className="error-message">{errors.SenderEmail}</p>}
                     </div>
                     <div className="form-group">
                         <label>Address</label>
@@ -164,15 +154,15 @@ const ContactUs = () => {
                     </div>
                 </div>
                 <div className="form-row">
-                    <div className="form-group">
-                        <label>Sender Email</label>
-                        <input
-                            type="email"
-                            name="senderEmail" // match this with the backend
-                            value={formData.senderEmail}
+                <div className="form-group">
+                        <label>Message</label>
+                        <textarea
+                            name="message"
+                            value={formData.message}
                             onChange={handleChange}
-                        />
-                        {errors.SenderEmail && <p className="error-message">{errors.SenderEmail}</p>}
+                            required
+                        ></textarea>
+                        {errors.message && <p className="error-message">{errors.message}</p>}
                     </div>
                 </div>
                 <button type="submit">Submit</button>
@@ -183,3 +173,5 @@ const ContactUs = () => {
 };
 
 export default ContactUs;
+
+

@@ -1,0 +1,89 @@
+/* LoginPage.css */
+body {
+    font-family: 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  
+  }
+   
+  
+  
+  .login-container {
+    background: linear-gradient(to right, #ffffff, #87CEEB); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .login-card {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 400px;
+  }
+  
+  .login-card h1 {
+    color: #FF6F61;
+    margin-bottom: 15px;
+  }
+  
+  .login-card p {
+    color: #6c757d; /* Gray color for a subtle look */
+    font-size: 16px; /* Slightly larger font size for readability */
+    line-height: 1.6; /* Improved line height for better text spacing */
+    margin-bottom: 25px; /* Adequate spacing between elements */
+    font-weight: 400; /* Regular weight for a clean appearance */
+    text-align: center; /* Center the text */
+  }
+  
+  .login-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .login-form label {
+    text-align: left;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+  }
+  
+  .login-form input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .login-btn {
+    background-color: #FF6F61;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .login-btn:hover {
+    background-color: #E65C50;
+  }
+  
+  .register-link {
+    margin-top: 10px;
+    font-size: 14px;
+  }
+  
+  .register-link a {
+    color: #FF6F61;
+    text-decoration: none;
+  }
+  
+  .register-link a:hover {
+    text-decoration: underline;
+  }
+  
