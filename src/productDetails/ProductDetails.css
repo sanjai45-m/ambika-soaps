@@ -12,6 +12,58 @@
     margin-bottom: 10px;
 }
 
+.subproducts-list .price-label {
+    color: black;
+}
+
+button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    background-color: #f7f9fb;
+    border: 2px solid #2ecc71;
+    border-radius: 5px;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #2ecc71;
+    color: white;
+    transform: scale(1.05);
+}
+
+button .icon {
+    display: inline-block;
+    margin-right: 8px;
+}
+
+
+.price-label {
+    color: #555;
+    font-size: 1em;
+    font-weight: normal;
+
+}
+
+.price-value {
+    color: #27ae60;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    margin-left: 5px;
+    transition: transform 0.2s ease-in-out;
+}
+
+
+.price-value:hover {
+    transform: scale(1.1);
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
 .product-details-container p {
     font-size: 1.5em;
     color: #777;
@@ -53,18 +105,81 @@
     margin: 0;
 }
 
+.cart-section {
+    margin-top: 20px;
+    padding: 15px;
+    border-top: 2px solid #e0e0e0;
+    background-color: #fff;
+}
+
+.cart-section h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.cart-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.cart-section li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.cart-item-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.cart-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.cart-actions button {
+    font-size: 1.5em;
+    padding: 5px 10px;
+    margin: 0 5px;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.cart-actions button:hover {
+    background-color: #27ae60;
+}
+
+.cart-actions span {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+
 .price {
     font-weight: bold;
-    font-size: 1.6em; /* Larger font size for better visibility */
-    color: #2ecc71; /* Green color to make it attractive */
+    font-size: 1.6em;
+    /* Larger font size for better visibility */
+    color: #2ecc71;
+    /* Green color to make it attractive */
     margin-top: 10px;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow to add depth */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow to add depth */
     transition: transform 0.2s ease-in-out;
 }
 
 /* Apply hover effect to price */
 .price:hover {
-    transform: scale(1.1); /* Slight scale effect on hover */
+    transform: scale(1.1);
+    /* Slight scale effect on hover */
 }
 
 /* Discount Badge positioning and styling */
@@ -96,6 +211,8 @@
     }
 
     .price {
-        font-size: 1.2em; /* Adjust price size on small screens */
+        font-size: 1.2em;
+        /* Adjust price size on small screens */
     }
+  
 }

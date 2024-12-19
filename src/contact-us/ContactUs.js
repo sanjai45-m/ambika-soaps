@@ -17,7 +17,7 @@ const ContactUs = () => {
 
     const validateForm = () => {
         const errors = {};
-    
+
         if (formData.name.trim().length < 2) {
             errors.name = 'Name must be at least 2 characters long.';
         }
@@ -36,11 +36,11 @@ const ContactUs = () => {
         if (!/\S+@\S+\.\S+/.test(formData.senderEmail)) { // use senderEmail here
             errors.senderEmail = 'Please enter a valid email address.';
         }
-    
+
         setErrors(errors);
         return Object.keys(errors).length === 0;
     };
-    
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -49,45 +49,42 @@ const ContactUs = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
         if (!validateForm()) {
             return;
         }
-    
+
         const urlEncodedData = new URLSearchParams();
         for (const key in formData) {
             urlEncodedData.append(key, formData[key]);
         }
-    
+
         try {
-          
-    
-            
-                // Sending data to Firebase
-                await fetch('https://authen-48d46-default-rtdb.firebaseio.com/contacts.json', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData),
-                });
-    
-                setStatus('Thank you for contacting us!');
-                setFormData({
-                    name: '',
-                    mobile: '',
-                    product: '',
-                    message: '',
-                    address: '',
-                    senderEmail: ''
-                });
-                setErrors({});
+            // Sending data to Firebase
+            await fetch('https://authen-48d46-default-rtdb.firebaseio.com/contacts.json', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            setStatus('Thank you for contacting us!');
+            setFormData({
+                name: '',
+                mobile: '',
+                product: '',
+                message: '',
+                address: '',
+                senderEmail: ''
+            });
+            setErrors({});
         } catch (error) {
             console.log("Request error:", error);
             setStatus('An error occurred. Please try again later.');
         }
     };
-    
+
 
     return (
         <div className="contact-us">
@@ -95,7 +92,7 @@ const ContactUs = () => {
             <form onSubmit={handleSubmit}>
                 <div className="form-row">
                     <div className="form-group">
-                        <label>Name</label> 
+                        <label>Name</label>
                         <input
                             type="text"
                             name="name"
@@ -131,7 +128,7 @@ const ContactUs = () => {
                     </div>
                 </div>
                 <div className="form-row">
-                <div className="form-group">
+                    <div className="form-group">
                         <label> Email</label>
                         <textarea
                             type="email"
@@ -154,7 +151,7 @@ const ContactUs = () => {
                     </div>
                 </div>
                 <div className="form-row">
-                <div className="form-group">
+                    <div className="form-group">
                         <label>Message</label>
                         <textarea
                             name="message"

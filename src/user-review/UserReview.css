@@ -8,7 +8,7 @@ body {
 
 /* Container Styling */
 .user-review-container {
-    height: 100vh;
+    height: 100%;
     padding: 20px;
     background: white; /* White background for review section */
     text-align: center;

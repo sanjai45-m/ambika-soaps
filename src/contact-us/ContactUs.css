@@ -8,6 +8,9 @@ body, html {
     overflow-x: hidden; /* Prevent horizontal scroll */
     background-image: url('/src/assets/charcoal-soap.jpg'); /* Replace with your image URL */
 }
+::-webkit-scrollbar {
+  display: none; /* Hides the scrollbar for Chrome, Safari, and Edge */
+}
 
 /* Contact Us section */
 .contact-us {
